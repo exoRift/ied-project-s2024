@@ -2,6 +2,8 @@
   "name": "ied-project-s2024",
   "version": "1.0.0",
   "description": "The source code for the control panel behind the Soleau Aerogation project for Intro to Engineering Design",
+  "module": "index.ts",
+  "type": "module",
   "scripts": {
     "dev": "concurrently 'dotenv -v NODE_ENV='development' -v PORT='4000' -c -- bun run server-dev' 'dotenv -c -- bun run --bun static'",
     "server-dev": "bun --watch ./src/server",
@@ -54,9 +56,10 @@
     "tailwindcss": "^3.4.1",
     "vite": "^5.1.6"
   },
-  "module": "index.ts",
-  "type": "module",
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "trustedDependencies": [
+    "dotenv-cli"
+  ]
 }
