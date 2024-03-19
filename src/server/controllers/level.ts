@@ -1,19 +1,15 @@
 import { type Middleware } from 'polka'
-import { HCSR04 } from 'hc-sr04'
 
-const TX = 0
-const RX = 2
+import { readDistance } from '../../lib/ranger'
 
-const ranger = new HCSR04(TX, RX)
+// Decieters
+const RADIUS = 0.73818 /* \frac{5+\frac{13}{16}}{2}\cdot 0.254 */
+const HEIGHT = 2.57175 /* \left(10+\frac{1}{8}\right)\cdot 0.254 */
 
 export const level: Middleware = (req, res) => {
   try {
-    res.tsend(200, ranger.distance())
+    res.tsend(200, 2 * Math.PI * RADIUS * (HEIGHT - readDistance())) /* Volume in liters (cubic decimeters) */
   } catch {
     res.tsend(500)
   }
-}
-
-while (true) {
-  console.log(ranger.distance())
 }
