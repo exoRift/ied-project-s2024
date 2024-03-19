@@ -8,8 +8,10 @@ const HEIGHT = 2.57175 /* \left(10+\frac{1}{8}\right)\cdot 0.254 */
 
 export const level: Middleware = (req, res) => {
   try {
-    res.tsend(200, 2 * Math.PI * RADIUS * (HEIGHT - readDistance())) /* Volume in liters (cubic decimeters) */
-  } catch {
+    res.tsend(200, String(2 * Math.PI * RADIUS * (HEIGHT - readDistance()))) /* Volume in liters (cubic decimeters) */
+  } catch (err) {
+    console.error(err)
+
     res.tsend(500)
   }
 }
