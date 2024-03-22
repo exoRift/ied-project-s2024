@@ -27,8 +27,11 @@ export const setSchedule: Middleware<any, any, Schedule> = (req, res) => {
     start: true,
     timeZone: 'America/New_York'
   })
+
+  res.tsend(200)
 }
 
 export const getSchedule: Middleware = (req, res) => {
-  res.tsend(200, setting)
+  if (setting) res.tsend(200, setting)
+  else res.tsend(404)
 }

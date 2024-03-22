@@ -4,12 +4,12 @@ import { Cron } from 'react-js-cron'
 import 'react-js-cron/dist/styles.css'
 import type { Schedule } from '../server/controllers/schedule'
 
-const VOLUME_POLL_INTERVAL = 1000
+const VOLUME_POLL_INTERVAL = 5000
 const MAX_CAPACITY = 2.57175 * 2 * Math.PI * 0.73818
 
 export default function Home (): React.ReactNode {
   const [volume, setVolume] = useState(-1)
-  const [cron, setCron] = useState('')
+  const [cron, setCron] = useState('0 0 * * *')
   const [waterAmount, setWaterAmount] = useState(0)
   const [nutrientAmount, setNutrientAmount] = useState(0)
   const [message, setMessage] = useState<string>()
@@ -53,6 +53,9 @@ export default function Home (): React.ReactNode {
   const setSchedule = useCallback(() => {
     void fetch('/api/schedule', {
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         cron,
         waterAmount,
@@ -64,7 +67,7 @@ export default function Home (): React.ReactNode {
 
         setTimeout(() => setMessage(undefined), 5000)
       })
-  }, [])
+  }, [cron, waterAmount, nutrientAmount])
 
   return (
     <div className='space-y-8'>
@@ -93,7 +96,7 @@ export default function Home (): React.ReactNode {
           <Cron value={cron} setValue={setCron} clearButton={false} className='[&_*]:mb-0' />
         </div>
 
-        <button className='bg-blue-400 text-white text-sm p-2 rounded-md'>Save Changes</button>
+        <button className='bg-blue-400 text-white text-sm p-2 rounded-md' onClick={setSchedule}>Save Changes</button>
       </div>
 
       {message}

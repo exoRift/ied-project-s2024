@@ -2,7 +2,7 @@ import { Gpio } from 'onoff'
 
 // Amount of water in L/min
 const OUTPUT_RATE = 1
-const PUMP_PIN = 7
+const PUMP_PIN = 4
 
 const pump = new Gpio(PUMP_PIN, 'out')
 void pump.write(0)
