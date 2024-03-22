@@ -1,6 +1,7 @@
 import type { Middleware } from 'polka'
 import { CronJob } from 'cron'
-import { releaseAmount } from '../../lib/pump'
+import { releaseAmount as releaseWater } from '../../lib/pump'
+import { releaseAmount as releaseNutrients } from '../../lib/nutrients'
 
 let setting: Schedule
 let job: CronJob | undefined
@@ -23,7 +24,10 @@ export const setSchedule: Middleware<any, any, Schedule> = (req, res) => {
   setting = req.body
   job = CronJob.from({
     cronTime: cron,
-    onTick: () => releaseAmount(waterAmount),
+    onTick: () => {
+      releaseWater(waterAmount)
+      releaseNutrients(nutrientAmount)
+    },
     start: true,
     timeZone: 'America/New_York'
   })
