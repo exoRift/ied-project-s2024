@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Cron } from 'react-js-cron'
 
 import 'react-js-cron/dist/styles.css'
@@ -12,6 +12,7 @@ export default function Home (): React.ReactNode {
   const [cron, setCron] = useState('')
   const [waterAmount, setWaterAmount] = useState(0)
   const [nutrientAmount, setNutrientAmount] = useState(0)
+  const [message, setMessage] = useState<string>()
 
   useEffect(() => {
     function fetchData (): void {
@@ -49,6 +50,22 @@ export default function Home (): React.ReactNode {
     return () => aborter.abort()
   }, [])
 
+  const setSchedule = useCallback(() => {
+    void fetch('/api/schedule', {
+      method: 'PUT',
+      body: JSON.stringify({
+        cron,
+        waterAmount,
+        nutrientAmount
+      } satisfies Schedule)
+    })
+      .then((res) => {
+        setMessage(res.status === 200 ? 'Saved' : 'An error occurred')
+
+        setTimeout(() => setMessage(undefined), 5000)
+      })
+  }, [])
+
   return (
     <div className='space-y-8'>
       <img src='/assets/images/soleau_banner.png' alt='Soleau' className='w-96' />
@@ -75,9 +92,11 @@ export default function Home (): React.ReactNode {
           milligrams of nutrients
           <Cron value={cron} setValue={setCron} clearButton={false} className='[&_*]:mb-0' />
         </div>
-        
+
         <button className='bg-blue-400 text-white text-sm p-2 rounded-md'>Save Changes</button>
       </div>
+
+      {message}
     </div>
   )
 }
