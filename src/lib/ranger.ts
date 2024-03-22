@@ -23,10 +23,11 @@ export function readDistance (): number {
   sleep(50)
   trigger.writeSync(0)
 
-  let start = performance.now()
-  let end = performance.now()
-  while (echo.readSync() === 0) start = performance.now()
-  while (echo.readSync() === 1 && (end - start < 2e6)) end = performance.now()
+  const inception = performance.now()
+  let start = inception
+  let end = inception
+  while (echo.readSync() === 0 && start - inception < 2e6) start = performance.now()
+  while (echo.readSync() === 1 && end - start < 2e6) end = performance.now()
 
   return (end - start) / 2 / MILLISECONDS_PER_DECIMETER
 }

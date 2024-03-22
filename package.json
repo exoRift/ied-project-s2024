@@ -23,11 +23,13 @@
     "@polka/send-type": "^0.5.2",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "cron": "^3.1.6",
     "epoll": "^4.0.2",
     "onoff": "^6.0.3",
     "polka": "^0.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-js-cron": "^5.0.1",
     "react-router-dom": "^6.22.3",
     "sirv": "^2.0.4"
   },
