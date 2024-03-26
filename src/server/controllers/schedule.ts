@@ -26,6 +26,7 @@ export const setSchedule: Middleware<any, any, Schedule> = (req, res) => {
     cronTime: cron,
     onTick: () => {
       releaseWater(waterAmount)
+      // TODO: Check if we have enough nutrients
       releaseNutrients(nutrientAmount)
     },
     start: true,

@@ -3,6 +3,11 @@ import { Gpio } from 'onoff'
 // The time it takes for sound to travel at STP
 const MILLISECONDS_PER_DECIMETER = 100 / 343 /* speed [m/s] ^-1 * 1000 / 10 */
 
+// Container dimensions
+// Declieters
+const RADIUS = 0.73818 /* \frac{5+\frac{13}{16}}{2}\cdot 0.254 */
+const HEIGHT = 2.57175 /* \left(10+\frac{1}{8}\right)\cdot 0.254 */
+
 const TX = 3
 const RX = 2
 
@@ -13,6 +18,13 @@ void trigger.write(0)
 function sleep (time: number): void {
   const start = performance.now()
   while (performance.now() - start < time);
+}
+
+/**
+ * @returns Water level in liters
+ */
+export function levelInLiters (): number {
+  return 2 * Math.PI * RADIUS * (HEIGHT - readDistance())
 }
 
 /**

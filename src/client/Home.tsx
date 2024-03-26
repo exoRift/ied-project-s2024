@@ -89,8 +89,10 @@ export default function Home (): React.ReactNode {
       <div className='space-y-2'>
         <div className='flex items-center gap-2'>
           Release
+          {/* TODO: Limit to capacity */}
           <input type='number' value={waterAmount.toString()} onChange={(e) => setWaterAmount(e.currentTarget.valueAsNumber)} className='h-8 border rounded-md w-12' />
           liters of water with
+          {/* TODO: Limit to capacity */}
           <input type='number' value={nutrientAmount.toString()} onChange={(e) => setNutrientAmount(e.currentTarget.valueAsNumber)} className='h-8 border rounded-md w-12' />
           milligrams of nutrients
           <Cron value={cron} setValue={setCron} clearButton={false} className='[&_*]:mb-0' />
