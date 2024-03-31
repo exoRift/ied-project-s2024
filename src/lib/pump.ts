@@ -15,7 +15,7 @@ export function releaseAmount (amount: number): void {
   const level = levelInLiters()
 
   if (level < amount) {
-    console.warn('Tried to release %dL. Only had %dL.', amount, Math.round(level * 100) / 100)
+    console.warn('Tried to release %dL of water. Only had %dL.', amount, Math.round(level * 100) / 100)
     return
   }
 
