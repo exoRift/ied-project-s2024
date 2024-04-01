@@ -11,7 +11,7 @@ void pump.write(0)
 /**
  * @param amount Amount in liters
  */
-export function releaseAmount (amount: number): void {
+export function releaseAmount (amount: number, onFinish?: () => void): void {
   const level = levelInLiters()
 
   if (level < amount) {
@@ -23,6 +23,7 @@ export function releaseAmount (amount: number): void {
   pump.writeSync(1)
   setTimeout(() => {
     console.log('Shutting off water pump')
-    pump.writeSync(0)
+    void pump.write(0)
+    onFinish?.()
   }, (amount / OUTPUT_RATE) * 60000)
 }

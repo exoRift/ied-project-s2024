@@ -2,6 +2,10 @@ import type { Middleware } from 'polka'
 import { CronJob } from 'cron'
 import { releaseAmount as releaseWater } from '../../lib/pump'
 import { releaseAmount as releaseNutrients } from '../../lib/nutrients'
+import { mixerOn } from '../../lib/mixer'
+import { irrigate } from '../../lib/irrigator'
+
+const MIX_TIME = 30e3
 
 let setting: Schedule
 let job: CronJob | undefined
@@ -25,11 +29,14 @@ export const setSchedule: Middleware<any, any, Schedule> = (req, res) => {
   job = CronJob.from({
     cronTime: cron,
     onTick: () => {
-      releaseWater(waterAmount)
-      releaseNutrients(nutrientAmount)
+      // Once done, turn on mixer and then release
+      function* postRelease (): Generator<void> {
+        yield
+        mixerOn(MIX_TIME, () => irrigate(waterAmount + nutrientAmount))
+      }
 
-      // TODO: Once done, turn on mixer
-      // TODO: After mixing, release into irrigation
+      releaseWater(waterAmount, postRelease)
+      releaseNutrients(nutrientAmount, postRelease)
     },
     start: true,
     timeZone: 'America/New_York'
