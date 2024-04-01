@@ -1,9 +1,9 @@
 import type { Middleware } from 'polka'
 import { CronJob } from 'cron'
-import { releaseAmount as releaseWater } from '../../lib/pump'
-import { releaseAmount as releaseNutrients } from '../../lib/nutrients'
-import { mixerOn } from '../../lib/mixer'
-import { irrigate } from '../../lib/irrigator'
+import { releaseAmount as releaseWater } from '../../lib/waterpump'
+import { releaseAmount as releaseNutrients } from '../../lib/nutrientpump'
+import { mixerOn } from '../../lib/mixermotor'
+import { irrigate } from '../../lib/irrigationpump'
 
 const MIX_TIME = 30e3
 
@@ -16,6 +16,9 @@ export interface Schedule {
   nutrientAmount: number
 }
 
+/**
+ * Schedule water/nutrient release
+ */
 export const setSchedule: Middleware<any, any, Schedule> = (req, res) => {
   job?.stop()
 
@@ -45,6 +48,9 @@ export const setSchedule: Middleware<any, any, Schedule> = (req, res) => {
   res.tsend(200)
 }
 
+/**
+ * Get the active schedule
+ */
 export const getSchedule: Middleware = (req, res) => {
   if (setting) res.tsend(200, setting)
   else res.tsend(404)

@@ -1,11 +1,11 @@
 import { Gpio } from 'onoff'
 
+import pins from './pins.json' assert { type: 'json' }
+
 // Amount of liquid in L/min
 const OUTPUT_RATE = 1
 
-const PUMP_PIN = 27
-
-const pump = new Gpio(PUMP_PIN, 'out')
+const pump = new Gpio(pins.irrigation_pump, 'out')
 void pump.write(0)
 
 export function irrigate (amount: number): void {

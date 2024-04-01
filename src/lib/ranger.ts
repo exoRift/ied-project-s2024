@@ -1,5 +1,7 @@
 import { Gpio } from 'onoff'
 
+import pins from './pins.json' assert { type: 'json' }
+
 // The time it takes for sound to travel at STP
 const MILLISECONDS_PER_DECIMETER = 100 / 343 /* speed [m/s] ^-1 * 1000 / 10 */
 
@@ -8,11 +10,8 @@ const MILLISECONDS_PER_DECIMETER = 100 / 343 /* speed [m/s] ^-1 * 1000 / 10 */
 const RADIUS = 0.73818 /* \frac{5+\frac{13}{16}}{2}\cdot 0.254 */
 const HEIGHT = 2.57175 /* \left(10+\frac{1}{8}\right)\cdot 0.254 */
 
-const TX = 3
-const RX = 2
-
-const trigger = new Gpio(TX, 'out')
-const echo = new Gpio(RX, 'in')
+const trigger = new Gpio(pins.ranger_tx, 'out')
+const echo = new Gpio(pins.ranger_rx, 'in')
 void trigger.write(0)
 
 function sleep (time: number): void {

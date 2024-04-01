@@ -3,7 +3,7 @@ import { Cron } from 'react-js-cron'
 
 import 'react-js-cron/dist/styles.css'
 import type { Schedule } from '../server/controllers/schedule'
-import type { ReplenishBody } from '../server/controllers/nutrients'
+import type { ReplenishBody } from '../server/controllers/nutrientlevel'
 
 const VOLUME_POLL_INTERVAL = 5000
 const MAX_WATER_CAPACITY = 2.57175 * 2 * Math.PI * 0.73818 // temp

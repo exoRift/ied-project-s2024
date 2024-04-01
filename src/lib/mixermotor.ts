@@ -1,8 +1,8 @@
 import { Gpio } from 'onoff'
 
-const MOTOR_PIN = 18
+import pins from './pins.json' assert { type: 'json' }
 
-const motor = new Gpio(MOTOR_PIN, 'out')
+const motor = new Gpio(pins.mixer_motor, 'out')
 void motor.write(0)
 
 export function mixerOn (time: number, onFinish?: () => void): void {

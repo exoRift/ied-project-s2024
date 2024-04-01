@@ -1,12 +1,13 @@
 import { Gpio } from 'onoff'
 
-import { nutrientLevel } from '../server/controllers/nutrients'
+import { nutrientLevel } from '../server/controllers/nutrientlevel'
+
+import pins from './pins.json' assert { type: 'json' }
 
 // Amount of nutrient solution in L/min
 const OUTPUT_RATE = 1
-const PUMP_PIN = 15
 
-const pump = new Gpio(PUMP_PIN, 'out')
+const pump = new Gpio(pins.nutrient_pump, 'out')
 void pump.write(0)
 
 /**

@@ -5,9 +5,9 @@ import { json } from 'body-parser'
 import cors from 'cors'
 import { sendType } from './middleware/typesend'
 
-import { level } from './controllers/level'
+import { getWaterLevel } from './controllers/waterlevel'
 import { getSchedule, setSchedule } from './controllers/schedule'
-import { getNutrientLevel, addNutrients } from './controllers/nutrients'
+import { getNutrientLevel, addNutrients } from './controllers/nutrientlevel'
 
 const {
   PORT,
@@ -22,7 +22,7 @@ app
   .use(sendType)
 
 app.all('/api', (req, res) => res.send(200))
-app.get('/api/level', level)
+app.get('/api/level', getWaterLevel)
 app.get('/api/schedule', getSchedule)
 app.put('/api/schedule', setSchedule) /* eslint-disable-line @typescript-eslint/no-unsafe-argument */
 app.get('/api/nutrients', getNutrientLevel)

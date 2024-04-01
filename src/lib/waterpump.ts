@@ -1,11 +1,13 @@
 import { Gpio } from 'onoff'
+
 import { levelInLiters } from './ranger'
+
+import pins from './pins.json' assert { type: 'json' }
 
 // Amount of water in L/min
 const OUTPUT_RATE = 1
-const PUMP_PIN = 4
 
-const pump = new Gpio(PUMP_PIN, 'out')
+const pump = new Gpio(pins.dehumidifer_pump, 'out')
 void pump.write(0)
 
 /**

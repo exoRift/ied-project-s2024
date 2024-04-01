@@ -1,0 +1,8 @@
+{
+  "ranger_tx": 3,
+  "ranger_rx": 2,
+  "dehumidifer_pump": 4,
+  "nutrient_pump": 15,
+  "mixer_motor": 18,
+  "irrigation_pump": 27
+}

@@ -5,9 +5,9 @@ import { levelInLiters } from '../../lib/ranger'
 /**
  * Get water lvel
  */
-export const level: Middleware = (req, res) => {
+export const getWaterLevel: Middleware = (req, res) => {
   try {
-    res.tsend(200, levelInLiters().toString()) /* Volume in liters (cubic decimeters / 10) */
+    res.tsend(200, levelInLiters().toString()) /* Volume in liters (cubic decimeters) */
   } catch (err) {
     console.error(err)
 
