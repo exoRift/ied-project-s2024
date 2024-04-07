@@ -6,8 +6,8 @@ import type { Schedule } from '../server/controllers/schedule'
 import type { ReplenishBody } from '../server/controllers/nutrientlevel'
 
 const VOLUME_POLL_INTERVAL = 5000
-const MAX_WATER_CAPACITY = 2.57175 * 2 * Math.PI * 0.73818 // temp
-const MAX_NUTRIENT_CAPACITY = 5 // temp
+const MAX_WATER_CAPACITY_ML = 2.57175 * 2 * Math.PI * 0.73818 // TODO: UPDATE
+const MAX_NUTRIENT_CAPACITY_ML = 5 // TODO: UPDATE
 
 export default function Home (): React.ReactNode {
   // Live stats
@@ -119,16 +119,16 @@ export default function Home (): React.ReactNode {
       <div>
         {waterLevel === -1
           ? 'Loading...'
-          : `Water: ${Math.round(waterLevel * 100) / 100}/${Math.round(MAX_WATER_CAPACITY * 100) / 100} liters`}
+          : `Water: ${Math.round(waterLevel * 100) / 100}/${Math.round(MAX_WATER_CAPACITY_ML * 100) / 100} milliliters`}
       </div>
 
       <div className='space-y-2'>
         <div className='flex max-sm:flex-col sm:items-center gap-2'>
           Release
-          <input type='number' min={0} max={MAX_WATER_CAPACITY} value={waterReleaseAmount.toString()} onChange={(e) => setWaterReleaseAmount(e.currentTarget.valueAsNumber)} className='h-8 border rounded-md w-12' />
-          liters of water with
-          <input type='number' min={0} max={MAX_NUTRIENT_CAPACITY} value={nutrientReleaseAmount.toString()} onChange={(e) => setNutrientReleaseAmount(e.currentTarget.valueAsNumber)} className='h-8 border rounded-md w-12' />
-          liters of nutrients
+          <input type='number' min={0} max={MAX_WATER_CAPACITY_ML} value={waterReleaseAmount.toString()} onChange={(e) => setWaterReleaseAmount(e.currentTarget.valueAsNumber)} className='h-8 border rounded-md w-12' />
+          milliliters of water with
+          <input type='number' min={0} max={MAX_NUTRIENT_CAPACITY_ML} value={nutrientReleaseAmount.toString()} onChange={(e) => setNutrientReleaseAmount(e.currentTarget.valueAsNumber)} className='h-8 border rounded-md w-12' />
+          milliliters of nutrients
           <Cron value={cron} setValue={setCron} clearButton={false} className='[&_*]:mb-0' />
         </div>
 
@@ -140,12 +140,12 @@ export default function Home (): React.ReactNode {
       <div className='!mt-12'>
         {nutrientVolume === -1
           ? 'Loading...'
-          : `Nutrients: ${Math.round(nutrientVolume * 100) / 100}/${Math.round(MAX_NUTRIENT_CAPACITY * 100) / 100} liters`}
+          : `Nutrients: ${Math.round(nutrientVolume * 100) / 100}/${Math.round(MAX_NUTRIENT_CAPACITY_ML * 100) / 100} milliliters`}
       </div>
 
       <div className='space-y-2'>
-        Replenish amount of nutrients in storage (liters)
-        <input type='number' min={0} max={MAX_NUTRIENT_CAPACITY - nutrientVolume} value={nutrientAddAmount.toString()} onChange={(e) => setNutrientAddAmount(e.currentTarget.valueAsNumber)} className='block h-8 border rounded-md w-12' />
+        Replenish amount of nutrients in storage (milliliters)
+        <input type='number' min={0} max={MAX_NUTRIENT_CAPACITY_ML - nutrientVolume} value={nutrientAddAmount.toString()} onChange={(e) => setNutrientAddAmount(e.currentTarget.valueAsNumber)} className='block h-8 border rounded-md w-12' />
         <button className='block bg-blue-400 text-white text-sm p-2 rounded-md' onClick={replenishNutrients}>Replenish</button>
 
         {nutrientMessage}

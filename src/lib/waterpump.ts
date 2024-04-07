@@ -1,23 +1,23 @@
 import { Gpio } from 'onoff'
 
-import { levelInLiters } from './ranger'
+import { levelInMilliliters } from './ranger'
 
 import pins from './pins.json' assert { type: 'json' }
 
-// Amount of water in L/min
+// Amount of water in mL/min
 const OUTPUT_RATE = 1
 
 const pump = new Gpio(pins.dehumidifer_pump, 'out')
 void pump.write(0)
 
 /**
- * @param amount Amount in liters
+ * @param amount Amount in milliliters
  */
 export function releaseAmount (amount: number, onFinish?: () => void): void {
-  const level = levelInLiters()
+  const level = levelInMilliliters()
 
   if (level < amount) {
-    console.warn('Tried to release %dL of water. Only had %dL.', amount, Math.round(level * 100) / 100)
+    console.warn('Tried to release %dmL of water. Only had %dmL.', amount, Math.round(level * 100) / 100)
     return
   }
 
