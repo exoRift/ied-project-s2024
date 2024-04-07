@@ -117,17 +117,9 @@ export default function Home (): React.ReactNode {
       </div>
 
       <div>
-        <div>
-          {waterLevel === -1
-            ? 'Loading...'
-            : `${Math.round(waterLevel * 100) / 100}/${Math.round(MAX_WATER_CAPACITY * 100) / 100} liters`}
-        </div>
-
-        <div>
-          {nutrientVolume === -1
-            ? 'Loading...'
-            : `${Math.round(nutrientVolume * 100) / 100}/${Math.round(MAX_NUTRIENT_CAPACITY * 100) / 100} liters`}
-        </div>
+        {waterLevel === -1
+          ? 'Loading...'
+          : `Water: ${Math.round(waterLevel * 100) / 100}/${Math.round(MAX_WATER_CAPACITY * 100) / 100} liters`}
       </div>
 
       <div className='space-y-2'>
@@ -145,7 +137,13 @@ export default function Home (): React.ReactNode {
 
       {scheduleMessage}
 
-      <div className='mt-20 space-y-2'>
+      <div className='!mt-12'>
+        {nutrientVolume === -1
+          ? 'Loading...'
+          : `Nutrients: ${Math.round(nutrientVolume * 100) / 100}/${Math.round(MAX_NUTRIENT_CAPACITY * 100) / 100} liters`}
+      </div>
+
+      <div className='space-y-2'>
         Replenish amount of nutrients in storage (liters)
         <input type='number' min={0} max={MAX_NUTRIENT_CAPACITY - nutrientVolume} value={nutrientAddAmount.toString()} onChange={(e) => setNutrientAddAmount(e.currentTarget.valueAsNumber)} className='block h-8 border rounded-md w-12' />
         <button className='block bg-blue-400 text-white text-sm p-2 rounded-md' onClick={replenishNutrients}>Replenish</button>
