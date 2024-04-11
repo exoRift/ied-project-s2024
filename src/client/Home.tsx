@@ -5,9 +5,9 @@ import 'react-js-cron/dist/styles.css'
 import type { Schedule } from '../server/controllers/schedule'
 import type { ReplenishBody } from '../server/controllers/nutrientlevel'
 
-const VOLUME_POLL_INTERVAL = 5000
-const MAX_WATER_CAPACITY_ML = 2.57175 * 2 * Math.PI * 0.73818 // TODO: UPDATE
-const MAX_NUTRIENT_CAPACITY_ML = 5 // TODO: UPDATE
+const VOLUME_POLL_INTERVAL = 2500
+const MAX_WATER_CAPACITY_ML = 2000
+const MAX_NUTRIENT_CAPACITY_ML = 470
 
 export default function Home (): React.ReactNode {
   // Live stats
@@ -146,7 +146,7 @@ export default function Home (): React.ReactNode {
       <div className='space-y-2'>
         Replenish amount of nutrients in storage (milliliters)
         <input type='number' min={0} max={MAX_NUTRIENT_CAPACITY_ML - nutrientVolume} value={nutrientAddAmount.toString()} onChange={(e) => setNutrientAddAmount(e.currentTarget.valueAsNumber)} className='block h-8 border rounded-md w-12' />
-        <button className='block bg-blue-400 text-white text-sm p-2 rounded-md' onClick={replenishNutrients}>Replenish</button>
+        <button className='block bg-blue-400 text-white text-sm p-2 rounded-md' onClick={replenishNutrients}>Record Refill</button>
 
         {nutrientMessage}
       </div>

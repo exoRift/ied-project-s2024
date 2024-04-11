@@ -9,7 +9,7 @@ const MS_PER_CM = 10 / 343 /* speed [m/s] ^-1 * 1000 / 100 */
 const FIRST_STAGE_ML_PER_CM = 157.3
 const SECOND_STAGE_ML_PER_CM = 146.5
 const STAGE_CUTOFF_CM = 4.83
-const TOTAL_HEIGHT_CM = 1 // TODO
+const TOTAL_HEIGHT_CM = 13.335 /* Tank */ - 1.27 /* Ranger */
 
 const trigger = new Gpio(pins.ranger_tx, 'out')
 const echo = new Gpio(pins.ranger_rx, 'in')
