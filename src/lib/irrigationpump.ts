@@ -3,7 +3,8 @@ import { Gpio } from 'onoff'
 import pins from './pins.json' assert { type: 'json' }
 
 // Amount of liquid in mL/min
-const OUTPUT_RATE = 1
+const OUTPUT_RATE = 0.40028
+// \frac{\frac{\left(\frac{100}{4.55}\right)+\left(\frac{100}{4.4}\right)+\left(\frac{100}{4.22}\right)}{3}+\frac{1.25+1.19+1.21}{3}}{60}
 
 const pump = new Gpio(pins.irrigation_pump, 'out')
 void pump.write(0)

@@ -5,7 +5,8 @@ import { nutrientLevel } from '../server/controllers/nutrientlevel'
 import pins from './pins.json' assert { type: 'json' }
 
 // Amount of nutrient solution in mL/min
-const OUTPUT_RATE = 1
+const OUTPUT_RATE = 0.11736
+// \frac{\frac{\left(\frac{50}{37.47}\right)+\left(\frac{50}{36.66}\right)+\left(\frac{50}{37.1}\right)}{3}+\frac{5.45+5.95+5.68}{3}}{60}
 
 const pump = new Gpio(pins.nutrient_pump, 'out')
 void pump.write(0)
