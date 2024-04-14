@@ -21,7 +21,7 @@ app
   .use(json())
   .use(sendType)
 
-app.all('/api', (req, res) => res.send(200))
+app.all('/api', (req, res) => res.tsend(200))
 app.get('/api/level', getWaterLevel)
 app.get('/api/schedule', getSchedule)
 app.put('/api/schedule', setSchedule) /* eslint-disable-line @typescript-eslint/no-unsafe-argument */

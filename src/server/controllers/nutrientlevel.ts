@@ -23,5 +23,5 @@ export const addNutrients: Middleware<any, any, ReplenishBody> = (req, res) => {
  * Get the nutrient level
  */
 export const getNutrientLevel: Middleware = (req, res) => {
-  res.tsend(200, nutrientLevel)
+  res.tsend(200, nutrientLevel.toString())
 }
