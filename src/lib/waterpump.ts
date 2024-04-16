@@ -22,7 +22,7 @@ export function releaseAmount (amount: number, onFinish?: () => void): void {
     return
   }
 
-  console.log('Releasing %dL of water', amount)
+  console.log('Releasing %dmL of water', amount)
   pump.writeSync(1)
   setTimeout(() => {
     console.log('Shutting off water pump')

@@ -16,6 +16,6 @@ export function irrigate (amount: number): void {
   setTimeout(() => {
     console.log('Finished pumping')
     void pump.write(0)
-  }, amount * OUTPUT_RATE * 60e3)
+  }, (amount / OUTPUT_RATE) * 60000)
 }
 
