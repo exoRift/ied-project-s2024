@@ -34,6 +34,15 @@ export default function Home (): React.ReactNode {
           return parseFloat(await res.text())
         })
         .then(setWaterLevel)
+
+      void fetch('api/nutrients', {
+        method: 'GET'
+      })
+        .then(async (res) => {
+          if (res.status !== 200) throw Error(await res.text())
+          return parseFloat(await res.text())
+        })
+        .then(setNutrientVolume)
     }
 
     const interval = setInterval(fetchData, VOLUME_POLL_INTERVAL)
@@ -58,16 +67,6 @@ export default function Home (): React.ReactNode {
         setWaterReleaseAmount(body.waterAmount)
         setNutrientReleaseAmount(body.nutrientAmount)
       })
-
-    void fetch('api/nutrients', {
-      method: 'GET',
-      signal: aborter.signal
-    })
-      .then(async (res) => {
-        if (res.status !== 200) throw Error(await res.text())
-        return parseFloat(await res.text())
-      })
-      .then(setNutrientVolume)
 
     return () => aborter.abort()
   }, [])
