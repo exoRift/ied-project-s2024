@@ -1,6 +1,6 @@
 {
-  "ranger_tx": 3,
-  "ranger_rx": 2,
+  "ranger_tx": 10,
+  "ranger_rx": 9,
   "dehumidifer_pump": 4,
   "nutrient_pump": 23,
   "mixer_motor": 24,
